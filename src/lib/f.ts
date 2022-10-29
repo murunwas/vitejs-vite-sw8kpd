@@ -5,12 +5,11 @@ import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 dayjs.extend(isSameOrBefore);
 import { maxDate, minDate } from "./utils";
 
-import data from "./data.json";
 import type { DeviceTelemetry } from "./types";
 
-export const formatter = async (metric = "realPower") => {
+export const formatter = async (telemetry:DeviceTelemetry[][],metric = "realPower") => {
     console.time("charge");
-  let m = await Collect(data as DeviceTelemetry[][]).reduce(
+  let m = await Collect(telemetry).reduce(
     (acc, item, index, array) => {
       const isLast = index === array.length - 1;
       if (item.length) {
@@ -47,7 +46,7 @@ export const formatter = async (metric = "realPower") => {
     }
   );
 
-  let all = await Collect(data as DeviceTelemetry[][])
+  let all = await Collect(telemetry)
     .filter((d) => d.length > 0)
     .reduce(
       (acc, item) => {

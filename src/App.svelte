@@ -14,7 +14,7 @@
 
   onMount(()=>{
     initChart(elem,m)
-    formatter()
+    formatter(data)
   })
 </script>
 

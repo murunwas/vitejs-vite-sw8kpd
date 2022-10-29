@@ -4,6 +4,7 @@ import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 dayjs.extend(isSameOrBefore);
 
 import { maxDate, minDate } from "./utils";
+import { chartData } from "./chartOption";
 
 export const merge1 = (multipleDeviceEvents=[],metric="realPower") => {
     console.time("normal");
@@ -60,63 +61,23 @@ export const merge1 = (multipleDeviceEvents=[],metric="realPower") => {
             data: [],
             legend: [],
             type: "line",
-            markArea: {},
+            xAxis: {},
         }
     );
+    
+    valuesResults.xAxis={
+        type: "category",
+        data: minuteSeries.map((date) =>
+            date.formatDate.format("DD-MM-YYYY HH:mm")
+        ),
+    }
 
-    let options: any = {
-        tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
-        toolbox: {
-            show: true,
-            feature: {
-                saveAsImage: {},
-                dataView: { readOnly: true },
-                magicType: { type: ["line", "bar"] },
-            },
-        },
-        title: {
-            text: "title",
-            show: true,
-            textStyle: {
-                fontSize: 14,
-                align: "center",
-            },
-        },
-        xAxis: {
-            type: "category",
-            data: minuteSeries.map((date) =>
-                date.formatDate.format("DD-MM-YYYY HH:mm")
-            ),
-        },
-        yAxis: { type: "value", name: "RealPower" },
-        series: valuesResults.data,
-        legend: {
-            type: "scroll",
-            orient: "vertical",
-            right: 10,
-            top: 40,
-            bottom: 20,
-            data: valuesResults.legend,
-        },
-    };
-
-    options.dataZoom = [
-        {
-            show: true,
-            realtime: true,
-            type: "slider",
-            start: true ? 40 : 0,
-            end: 100,
-            xAxisIndex: [0, 1],
-        },
-        {
-            type: "inside",
-            realtime: true,
-            start: true ? 40 : 0,
-            end: 100,
-            xAxisIndex: [0, 1],
-        },
-    ];
     console.timeEnd("normal");
-    return options;
+    return chartData({
+        legendData:valuesResults.legend,
+        series:valuesResults.data,
+        xAxis:valuesResults.xAxis,
+        subTitle:"",
+        title:""
+    });
 };
