@@ -1,5 +1,6 @@
 <script lang="ts">
   import {onMount} from "svelte"
+  import Counter from "./lib/Counter.svelte"
   import {merge1} from "./lib/app"
 
   import {formatter} from "./lib/f"
@@ -22,5 +23,6 @@
   <h1>Vite + Svelte</h1>
   <div bind:this={elem} style="width: 100vw;height:400px;"></div>
 <!-- <pre>{JSON.stringify(m,null,2)}</pre> -->
- 
+ <hr/>
+ <Counter/>
 </main>

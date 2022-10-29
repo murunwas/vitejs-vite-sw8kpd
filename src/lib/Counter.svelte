@@ -1,10 +1,17 @@
 <script lang="ts">
-  let count: number = 0
-  const increment = () => {
-    count += 1
-  }
+  import {connect} from "./store/base"
+  import {TelemetryStore} from "./store/telemetryStore"
+  
+  const { autorun } = connect();
+  let vm = new TelemetryStore();
+  let d=null;
+
+  $: autorun(() => {
+     d = vm.isMinute
+    });
 </script>
 
-<button on:click={increment}>
-  count is {count}
-</button>
+{d}
+
+<button on:click={()=>vm.toggleGranularity()}>toggle</button>
+
