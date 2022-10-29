@@ -6,6 +6,7 @@ dayjs.extend(isSameOrBefore);
 import { maxDate, minDate } from "./utils";
 
 export const merge1 = (multipleDeviceEvents=[],metric="realPower") => {
+    console.time("normal");
     const dates = [];
 
     for (let index = 0; index < multipleDeviceEvents.length; index++) {
@@ -116,6 +117,6 @@ export const merge1 = (multipleDeviceEvents=[],metric="realPower") => {
             xAxisIndex: [0, 1],
         },
     ];
-
+    console.timeEnd("normal");
     return options;
 };

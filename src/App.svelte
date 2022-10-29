@@ -1,6 +1,8 @@
 <script lang="ts">
   import {onMount} from "svelte"
   import {merge1} from "./lib/app"
+
+  import {formatter} from "./lib/f"
   import { initChart } from "./lib/utils";
 
   import data from "./lib/data.json";
@@ -12,6 +14,7 @@
 
   onMount(()=>{
     initChart(elem,m)
+    formatter()
   })
 </script>
 
