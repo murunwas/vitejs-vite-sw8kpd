@@ -1,6 +1,8 @@
 <script lang="ts">
   import {onMount} from "svelte"
   import Counter from "./lib/Counter.svelte"
+  import Danfojs from "./lib/Danfojs.svelte"
+  
   import {merge1} from "./lib/app"
 
   import {formatter} from "./lib/f"
@@ -24,5 +26,7 @@
   <div bind:this={elem} style="width: 100vw;height:400px;"></div>
 <!-- <pre>{JSON.stringify(m,null,2)}</pre> -->
  <hr/>
+ <Danfojs>
  <Counter/>
+</Danfojs>
 </main>
